@@ -11,7 +11,9 @@ npm run import:source -- week-01 /path/to/old-lab01
 ## Evidence ที่ควรมี
 
 - ผล `node --version`, `npm --version`, `git --version`
+![alt text](image-1.png)
 - Screenshot โปรแกรม `hello.js`
+![alt text](image.png)
 - Original Repository URL และ Commit SHA
 - Reflection สั้น ๆ ว่าใช้ Git workflow อย่างไร
 

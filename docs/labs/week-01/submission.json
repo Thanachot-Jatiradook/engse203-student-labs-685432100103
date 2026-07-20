@@ -1,15 +1,15 @@
 {
   "week": "week-01",
   "title": "Developer Environment & GitHub Repository Setup",
-  "status": "draft",
-  "originalRepoUrl": "",
-  "originalCommit": "",
-  "pullRequestUrl": "",
-  "submissionTag": "",
-  "testStatus": "not-tested",
-  "notes": "LAB 1 ใช้ evidence report ได้โดยไม่ต้องมี web application",
+  "status": "submitted",
+  "originalRepoUrl": "https://github.com/Thanachot-Jatiradook/engse203-lab01-68543210010-3",
+  "originalCommit": "f3cc36841a7d1f6364b57723d8f8cfad2880f272",
+  "pullRequestUrl": "https://github.com/Thanachot-Jatiradook/engse203-student-labs-685432100103/pull/1",
+  "submissionTag": "lab-01-submission-v1",
+  "testStatus": "pass",
+  "notes": "รัน hello.js และตรวจ environment แล้ว",
   "pageUrl": "https://Thanachot-Jatiradook.github.io/engse203-student-labs-685432100103/labs/week-01/",
   "sourceUrl": "https://github.com/Thanachot-Jatiradook/engse203-student-labs-685432100103/tree/lab/week-01/labs/week-01/source",
   "hasPublish": false,
-  "sourceEntries": 0
+  "sourceEntries": 4
 }
