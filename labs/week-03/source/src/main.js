@@ -96,14 +96,15 @@ function resetFormState() {
     });
 }
 
-function handleInput() {
+function handleFormInteraction() {
     const data = readForm();
     renderPreview(data);
     renderErrors(validate(data));
 }
 
 if (form) {
-    form.addEventListener('input', handleInput);
+    form.addEventListener('input', handleFormInteraction);
+    form.addEventListener('change', handleFormInteraction);
 
     form.addEventListener('submit', (ev) => {
         ev.preventDefault();
