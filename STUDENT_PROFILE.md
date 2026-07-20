@@ -3,10 +3,9 @@
 | รายการ | ข้อมูล |
 |---|---|
 | รายวิชา | ENGSE203 การเขียนโปรแกรมสำหรับวิศวกรซอฟต์แวร์ |
-| รหัสนักศึกษา | STUDENT-ID |
-| ชื่อ-นามสกุล | ชื่อ-นามสกุล |
-| Section | SEC-X |
-| GitHub Username | GITHUB-USERNAME |
-| Repository | `engse203-student-labs-STUDENT-ID` |
-
-> ไฟล์นี้จะถูกปรับข้อมูลเมื่อรัน `npm run setup`
+| รหัสนักศึกษา | 685432100103 |
+| ชื่อ-นามสกุล | ธนโชติ จาติระดุก |
+| Section | SEC1 |
+| GitHub Username | Thanachot-Jatiradook |
+| Repository | `engse203-student-labs-685432100103` |
+| Pages Hub | https://Thanachot-Jatiradook.github.io/engse203-student-labs-685432100103/ |
