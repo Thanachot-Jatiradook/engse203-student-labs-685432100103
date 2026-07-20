@@ -1,5 +1,3 @@
-import './style.css';
-
 const form = document.querySelector('#request-form');
 const requesterName = document.querySelector('#requester-name');
 const requestType = document.querySelector('#request-type');
