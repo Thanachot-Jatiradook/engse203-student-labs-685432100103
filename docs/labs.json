@@ -1,0 +1,62 @@
+[
+  {
+    "week": "week-01",
+    "title": "Developer Environment & GitHub Repository Setup",
+    "status": "submitted",
+    "originalRepoUrl": "https://github.com/Thanachot-Jatiradook/engse203-lab01-68543210010-3",
+    "originalCommit": "f3cc36841a7d1f6364b57723d8f8cfad2880f272",
+    "pullRequestUrl": "https://github.com/Thanachot-Jatiradook/engse203-student-labs-685432100103/pull/1",
+    "submissionTag": "lab-01-submission-v1",
+    "testStatus": "pass",
+    "notes": "รัน hello.js และตรวจ environment แล้ว",
+    "pageUrl": "https://Thanachot-Jatiradook.github.io/engse203-student-labs-685432100103/labs/week-01/",
+    "sourceUrl": "https://github.com/Thanachot-Jatiradook/engse203-student-labs-685432100103/tree/lab/week-01/labs/week-01/source",
+    "hasPublish": false,
+    "sourceEntries": 4
+  },
+  {
+    "week": "week-02",
+    "title": "Modern JavaScript Learning Dashboard",
+    "status": "submitted",
+    "originalRepoUrl": "https://github.com/Thanachot-Jatiradook/engse203-lab02-68543210010-3",
+    "originalCommit": "3d83563a5876ca9da86f0c41af12f26d74e1f827",
+    "pullRequestUrl": "https://github.com/Thanachot-Jatiradook/engse203-student-labs-685432100103/pull/3",
+    "submissionTag": "lab-02-submission-v1",
+    "testStatus": "pass",
+    "notes": "นำ Vite build output ที่มี index.html เข้า publish/",
+    "pageUrl": "https://Thanachot-Jatiradook.github.io/engse203-student-labs-685432100103/labs/week-02/",
+    "sourceUrl": "https://github.com/Thanachot-Jatiradook/engse203-student-labs-685432100103/tree/lab/week-02/labs/week-02/source",
+    "hasPublish": true,
+    "sourceEntries": 11
+  },
+  {
+    "week": "week-03",
+    "title": "Responsive Web UI & Form Interaction",
+    "status": "submitted",
+    "originalRepoUrl": "https://github.com/Thanachot-Jatiradook/engse203-lab03-68543210010-3",
+    "originalCommit": "a9c9dde58782bc63f53eaf802eb6c4959411254e",
+    "pullRequestUrl": "https://github.com/Thanachot-Jatiradook/engse203-student-labs-685432100103/pull/8",
+    "submissionTag": "lab-03-submission-v1",
+    "testStatus": "pass",
+    "notes": "Static site ต้องมี index.html ที่ publish root",
+    "pageUrl": "https://Thanachot-Jatiradook.github.io/engse203-student-labs-685432100103/labs/week-03/",
+    "sourceUrl": "https://github.com/Thanachot-Jatiradook/engse203-student-labs-685432100103/tree/lab/week-03/labs/week-03/source",
+    "hasPublish": true,
+    "sourceEntries": 9
+  },
+  {
+    "week": "week-04",
+    "title": "React Campus Service Request",
+    "status": "ready",
+    "originalRepoUrl": "https://github.com/Thanachot-Jatiradook/engse203-student-labs-685432100103",
+    "originalCommit": "897715e19c412bd5910e93e46ec82da42e34e2b3",
+    "pullRequestUrl": "https://github.com/Thanachot-Jatiradook/engse203-student-labs-685432100103/pull/9",
+    "submissionTag": "lab-04-submission-v1",
+    "testStatus": "pass",
+    "notes": "React Campus Service Request",
+    "pageUrl": "https://Thanachot-Jatiradook.github.io/engse203-student-labs-685432100103/labs/week-04/",
+    "sourceUrl": "https://github.com/Thanachot-Jatiradook/engse203-student-labs-685432100103/tree/lab/week-04/labs/week-04/source",
+    "hasPublish": true,
+    "sourceEntries": 10
+  }
+]
