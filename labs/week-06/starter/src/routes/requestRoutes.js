@@ -5,8 +5,9 @@ import { validateRequest } from '../middleware/validateRequest.js';
 const router = Router();
 
 router.get('/', controller.listRequests);
-router.get('/:id', controller.getRequest);
 router.post('/', validateRequest, controller.createRequest);
+router.get('/:id', controller.getRequest);
+router.put('/:id', controller.updateRequestStatus);
 router.delete('/:id', controller.deleteRequest);
 
 

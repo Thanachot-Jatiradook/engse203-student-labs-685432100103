@@ -1,14 +1,25 @@
-import { readFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 
 const SEED_PATH = new URL('../../data/initialRequests.json', import.meta.url);
+const DATA_PATH = new URL('../../data/requests.json', import.meta.url);
+
+async function persist() {
+  await writeFile(DATA_PATH, JSON.stringify(requests, null, 2), 'utf8');
+}
 
 /** ข้อมูลอยู่ในหน่วยความจำของเซิร์ฟเวอร์ — หน่วย 4 จะเปลี่ยนเป็นฐานข้อมูล */
 let requests = [];
 
 /** โหลดข้อมูลตัวอย่างตอนเซิร์ฟเวอร์เริ่มทำงาน — ให้มาแล้ว ไม่ต้องแก้ */
 export async function loadSeed() {
-  const raw = await readFile(SEED_PATH, 'utf8');
-  requests = JSON.parse(raw);
+  try {
+    const raw = await readFile(DATA_PATH, 'utf8');
+    requests = JSON.parse(raw);
+  } catch {
+    const raw = await readFile(SEED_PATH, 'utf8');
+    requests = JSON.parse(raw);
+    await persist();
+  }
   return requests;
 }
 
@@ -47,7 +58,7 @@ function createId() {
  * ลำดับ: สร้าง object ใหม่ (ใช้ createId()) → ตัดช่องว่างหัวท้ายทุก field ที่เป็นข้อความ
  *        → status เริ่มต้นเป็น 'pending' เสมอ → push เข้า requests → คืนสำเนา
  */
-export function create(input) {
+export async function create(input) {
   const newRequest = {
     id: createId(),
     requesterName: input.requesterName.trim(),
@@ -58,6 +69,7 @@ export function create(input) {
     status: 'pending',
   };
   requests.push(newRequest);
+  await persist();
   return structuredClone(newRequest);
 }
 
@@ -66,7 +78,10 @@ export function create(input) {
  * - ไม่พบคืน null · พบแล้วเปลี่ยน status และคืนสำเนา
  */
 export function updateStatus(id, status) {
-  throw new Error('TODO W06-S4: updateStatus');
+  const request = requests.find((r) => r.id === id);
+  if (!request) return null;
+  request.status = status;
+  return structuredClone(request);
 }
 
 /**
@@ -74,8 +89,12 @@ export function updateStatus(id, status) {
  * - คืน true ถ้าลบได้จริง · คืน false ถ้าไม่พบรหัสนั้น
  * - ใช้ .filter() สร้าง array ใหม่ อย่าแก้ array เดิม
  */
-export function remove(id) {
+export async function remove(id) {
   const before = requests.length;
   requests = requests.filter((r) => r.id !== id);
-  return requests.length < before;
+  const changed = requests.length < before;
+  if (changed) {
+    await persist();
+  }
+  return changed;
 }
