@@ -7,6 +7,7 @@ const router = Router();
 // route เจาะจงต้องมาก่อน route ที่มี :id เสมอ
 router.get('/', controller.listRequests);
 router.post('/', validateRequest, controller.createRequest);
+router.post('/reset', controller.resetRequests);
 router.get('/:id', controller.getRequest);
 router.put('/:id', controller.updateRequestStatus);
 router.delete('/:id', controller.deleteRequest);

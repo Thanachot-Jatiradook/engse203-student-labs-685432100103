@@ -40,3 +40,13 @@ export function deleteRequest(req, res) {
   }
   res.status(204).end();
 }
+
+export async function resetRequests(req, res, next) {
+  try {
+    const data = await service.loadSeed();
+    res.status(200).json(data);
+  } catch (err) {
+    next(err);
+  }
+}
+

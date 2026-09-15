@@ -3,6 +3,7 @@ import { config } from './config.js';
 import requestRoutes from './routes/requestRoutes.js';
 import { errorHandler, notFound } from './middleware/errorHandler.js';
 import cors from 'cors';
+import morgan from 'morgan';
 
 export function createApp() {
   const app = express();
@@ -22,6 +23,7 @@ export function createApp() {
    *   prod → morgan('combined')  ละเอียด เหมาะเก็บ log
    * ใช้ config.isProduction ตัดสิน
    */
+  app.use(morgan(config.isProduction ? 'combined' : 'dev'));
 
   app.use(express.json());
 

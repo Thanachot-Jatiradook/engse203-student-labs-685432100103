@@ -70,7 +70,8 @@ export async function deleteRequest(requestId) {
   return getRequests();   // คืนรายการล่าสุดจากเซิร์ฟเวอร์
 }
 
-/** Week 07 ยังไม่มี endpoint reset — โหลดรายการปัจจุบันกลับมาแทน */
+/** คืนข้อมูลตัวอย่างเริ่มต้นจากเซิร์ฟเวอร์ */
 export async function resetRequests() {
-  return getRequests();
+  return apiFetch('/api/requests/reset', { method: 'POST' });
 }
+
