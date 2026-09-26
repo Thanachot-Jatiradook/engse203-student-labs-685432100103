@@ -12,6 +12,8 @@ PRAGMA foreign_keys = ON;
 -- TODO ①  ลบตารางเดิมก่อน เพื่อให้รันไฟล์นี้ซ้ำได้
 --         ⚠ ลำดับสำคัญ — ต้องลบตารางที่มี foreign key ก่อน
 --         คำใบ้: DROP TABLE IF EXISTS ...
+DROP TABLE IF EXISTS requests;
+DROP TABLE IF EXISTS users;
 
 
 -- TODO ②  สร้างตาราง users
@@ -54,6 +56,9 @@ CREATE TABLE requests (
 
   FOREIGN KEY (requester_id) REFERENCES users(id)
 );
+
+CREATE INDEX IF NOT EXISTS idx_requests_status ON requests(status);
+CREATE INDEX IF NOT EXISTS idx_requests_requester_id ON requests(requester_id);
 
 
 -- TODO ④  ใส่ข้อมูลตั้งต้น

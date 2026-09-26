@@ -12,6 +12,8 @@ PRAGMA foreign_keys = ON;
 -- TODO ①  ลบตารางเดิมก่อน เพื่อให้รันไฟล์นี้ซ้ำได้
 --         ⚠ ลำดับสำคัญ — ต้องลบตารางที่มี foreign key ก่อน
 --         คำใบ้: DROP TABLE IF EXISTS ...
+DROP TABLE IF EXISTS requests;
+DROP TABLE IF EXISTS users;
 
 
 -- TODO ②  สร้างตาราง users
@@ -55,6 +57,9 @@ CREATE TABLE requests (
   FOREIGN KEY (requester_id) REFERENCES users(id)
 );
 
+CREATE INDEX IF NOT EXISTS idx_requests_status ON requests(status);
+CREATE INDEX IF NOT EXISTS idx_requests_requester_id ON requests(requester_id);
+
 
 -- TODO ④  ใส่ข้อมูลตั้งต้น
 --         users อย่างน้อย 4 คน · requests อย่างน้อย 5 รายการ
@@ -68,6 +73,10 @@ INSERT INTO users (name, department, email) VALUES
   INSERT INTO requests (id, requester_id, request_type, location, details, priority, status) VALUES
   ('REQ-001', 1, 'แจ้งซ่อม',          'ห้องปฏิบัติการ 301', 'เครื่องปรับอากาศไม่ทำงานตั้งแต่เช้า', 'urgent', 'pending'),
   ('REQ-002', 2, 'บริการบัญชีผู้ใช้', 'อาคารวิศวกรรม',      'เข้าสู่ระบบห้องปฏิบัติการไม่ได้',     'normal', 'in-progress'),
-  ('REQ-003', 3, 'ขอใช้อุปกรณ์',      'ห้องประชุม 2',        'ขอยืมโปรเจกเตอร์',                 'normal', 'completed'),
+  ('REQ-003', 3, 'ขอใช้อุปกรณ์',      'ห้องประชุม 2',        'ขอยืมโปรเจกเตอร์สำหรับนำเสนอโครงงาน', 'normal', 'completed'),
   ('REQ-004', 1, 'แจ้งซ่อม',          'ห้องปฏิบัติการ 302', 'คอมพิวเตอร์เครื่องที่ 5 เปิดไม่ติด', 'urgent', 'pending'),
-  ('REQ-005', 4, 'อื่น ๆ',             'ห้องสมุด ชั้น 2',     'ขอเพิ่มปลั๊กไฟบริเวณโต๊ะอ่านหนังสือ', 'normal', 'pending');
+  ('REQ-005', 4, 'อื่น ๆ',             'ห้องสมุด ชั้น 2',     'ขอเพิ่มปลั๊กไฟบริเวณโต๊ะอ่านหนังสือ', 'normal', 'pending'),
+  ('REQ-006', 2, 'ขอใช้อุปกรณ์',      'ห้องปฏิบัติการ 303', 'ขอยืมสายแปลง HDMI สำหรับสอน',         'normal', 'completed'),
+  ('REQ-007', 3, 'แจ้งซ่อม',          'อาคารวิศวกรรม ชั้น 4', 'ก๊อกน้ำในห้องน้ำรั่วไหลตลอดเวลา',    'urgent', 'in-progress'),
+  ('REQ-008', 4, 'อื่น ๆ',             'ลานกิจกรรม',         'ขอติดตั้งเต็นท์สำหรับงานนิทรรศการ',     'normal', 'pending');
+

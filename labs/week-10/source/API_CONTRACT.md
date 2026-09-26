@@ -187,3 +187,52 @@ cd frontend && npm run dev     # http://localhost:5173
 ```
 
 **ลำดับสำคัญ** — เปิด API ก่อนเสมอ ไม่งั้น frontend จะขึ้นข้อความว่าติดต่อเซิร์ฟเวอร์ไม่ได้
+
+---
+
+## Data Model & โครงสร้างฐานข้อมูล (Database Schema)
+
+ระบบเปลี่ยนการจัดเก็บข้อมูลจากไฟล์ JSON มาเป็นฐานข้อมูลเชิงสัมพันธ์ **SQLite** (`api/data/campus.db`) โดยเปิดใช้งาน `PRAGMA foreign_keys = ON;` เพื่อรับประกันความถูกต้องสมบูรณ์ของความสัมพันธ์ (Referential Integrity)
+
+### ตารางในฐานข้อมูล (Tables)
+
+#### 1. ตาราง `users` (ผู้ใช้งาน / ผู้แจ้งคำร้อง)
+
+| คอลัมน์ | ชนิดข้อมูล | เงื่อนไข (Constraints) | คำอธิบาย |
+|---|---|---|---|
+| `id` | `INTEGER` | `PRIMARY KEY AUTOINCREMENT` | รหัสผู้ใช้ อัตโนมัติ |
+| `name` | `TEXT` | `NOT NULL` | ชื่อ-นามสกุล ผู้ใช้ |
+| `department` | `TEXT` | `NOT NULL` | หน่วยงาน / สาขาวิชา |
+| `email` | `TEXT` | `NOT NULL UNIQUE` | อีเมล (ห้ามซ้ำ) |
+
+#### 2. ตาราง `requests` (คำร้องขอรับบริการ)
+
+| คอลัมน์ | ชนิดข้อมูล | เงื่อนไข (Constraints) | คำอธิบาย |
+|---|---|---|---|
+| `id` | `TEXT` | `PRIMARY KEY` | รหัสคำร้อง เช่น `REQ-001` |
+| `requester_id` | `INTEGER` | `NOT NULL, REFERENCES users(id)` | Foreign Key เชื่อมกับ `users.id` |
+| `request_type` | `TEXT` | `NOT NULL, CHECK (request_type IN ('แจ้งซ่อม','บริการบัญชีผู้ใช้','ขอใช้อุปกรณ์','อื่น ๆ'))` | ประเภทของคำร้อง |
+| `location` | `TEXT` | `NOT NULL` | สถานที่เกิดเหตุ / ใช้งาน |
+| `details` | `TEXT` | `NOT NULL` | รายละเอียดคำร้อง |
+| `priority` | `TEXT` | `NOT NULL DEFAULT 'normal', CHECK (priority IN ('normal','urgent'))` | ระดับความสำคัญ |
+| `status` | `TEXT` | `NOT NULL DEFAULT 'pending', CHECK (status IN ('pending','in-progress','completed'))` | สถานะการดำเนินงาน |
+| `created_at` | `TEXT` | `NOT NULL DEFAULT (datetime('now','localtime'))` | วันเวลาที่บันทึก |
+
+### ความสัมพันธ์ระหว่างตาราง (Entity Relationships)
+- ความสัมพันธ์แบบ **One-to-Many (1:N)**: ผู้ใช้งาน 1 คน (`users`) สามารถสร้างคำร้อง (`requests`) ได้หลายรายการ ผ่าน Foreign Key `requests.requester_id -> users.id`
+- เมื่อ API ตอบสนองคำสั่ง `GET /api/requests` จะทำ `JOIN users ON users.id = requests.requester_id` เพื่อแปลง `requester_id` เป็น `requesterName` ตาม API Contract
+
+### ดัชนี (Indexes)
+เพื่อเพิ่มประสิทธิภาพการค้นหาและการกรองข้อมูล:
+- `idx_requests_status` บน `requests(status)` สำหรับเร่งความเร็วการกรอง `?status=`
+- `idx_requests_requester_id` บน `requests(requester_id)` สำหรับเร่งความเร็วการ `JOIN` กับตาราง `users`
+
+---
+
+## Users Endpoints (ส่วนต่อขยาย / Challenge)
+
+| Method | Endpoint | คำอธิบาย | Request body | ผลลัพธ์สำเร็จ | ผิดพลาด |
+|---|---|---|---|---|---|
+| `GET` | `/api/users` | ดึงรายชื่อผู้ใช้ทั้งหมด | — | `200` + array ของ users | — |
+| `GET` | `/api/users/:id` | ดึงข้อมูลผู้ใช้รายบุคคล | — | `200` + object ของ user | `404` ไม่พบผู้ใช้ |
+
