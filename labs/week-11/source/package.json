@@ -8,7 +8,7 @@
   "scripts": {
     "check": "node --disable-warning=ExperimentalWarning check-week11.mjs",
     "start": "npm --prefix api start",
-    "build": "npm install --prefix api && npm install --prefix frontend --include=dev && npm run build --prefix frontend",
+    "build": "npm --prefix api install && npm --prefix frontend install --include=dev && npm --prefix frontend run build",
     "preview": "vite preview"
   },
   "devDependencies": {
