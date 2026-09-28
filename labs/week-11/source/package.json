@@ -6,7 +6,10 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "check": "node --disable-warning=ExperimentalWarning check-week11.mjs"
+    "check": "node --disable-warning=ExperimentalWarning check-week11.mjs",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
     "supertest": "^7.2.2"
