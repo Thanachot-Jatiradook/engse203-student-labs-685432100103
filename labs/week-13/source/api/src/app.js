@@ -18,6 +18,12 @@ export function createApp() {
   //    production ไม่จำเป็น เพราะเว็บกับ API อยู่ origin เดียวกัน แต่ใส่ไว้ไม่เสียหาย
   app.use(cors({ origin: config.corsOrigin }));
 
+  // ⭐ Security header (Challenge)
+  app.use((req, res, next) => {
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    next();
+  });
+
   // ② logging — dev อ่านง่าย · production ละเอียดสำหรับเก็บ log
   // test ไม่ต้อง log ทุกคำขอ — ผลการทดสอบจะได้อ่านง่าย
   if (config.env !== 'test') app.use(morgan(config.isProd ? 'combined' : 'dev'));

@@ -31,12 +31,15 @@ export const config = {
   staticDir: process.env.STATIC_DIR ?? path.join(API_ROOT, '..', 'frontend', 'dist'),
 
   /**
-   * 🏫 TODO W13-SECRET (CP52) — แบบนี้ยังอันตราย
-   *   ถ้าลืมตั้ง JWT_SECRET ตอน production ระบบจะใช้ค่าด้านล่างซึ่งอยู่ใน GitHub ให้ทุกคนเห็น
-   *   → ใครก็ปลอม token ของเจ้าหน้าที่ได้
-   *   แก้: production ที่ไม่มี JWT_SECRET ต้อง throw new Error(...) ทันที (fail fast)
-   *        dev/test ยังใช้ค่าสำหรับพัฒนาได้
+   * 🏫 TODO W13-SECRET (CP52)
+   *   production ที่ไม่มี JWT_SECRET ต้อง throw new Error(...) ทันที (fail fast)
+   *   dev/test ยังใช้ค่าสำหรับพัฒนาได้
    */
-  jwtSecret: process.env.JWT_SECRET || 'dev-only-secret-do-not-use-in-production',
+  jwtSecret: (() => {
+    if (process.env.NODE_ENV === 'production' && !process.env.JWT_SECRET) {
+      throw new Error('JWT_SECRET must be set in production');
+    }
+    return process.env.JWT_SECRET || 'dev-only-secret-do-not-use-in-production';
+  })(),
   jwtExpiresIn: process.env.JWT_EXPIRES_IN ?? '2h',
 };

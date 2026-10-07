@@ -31,10 +31,16 @@ async function parseError(response) {
  */
 export async function apiFetch(path, options = {}) {
   let response;
+  const token = typeof localStorage !== 'undefined' ? localStorage.getItem('token') : null;
+  const authHeaders = token ? { Authorization: `Bearer ${token}` } : {};
   try {
     response = await fetch(`${BASE_URL}${path}`, {
-      headers: { 'Content-Type': 'application/json', ...options.headers },
       ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        ...authHeaders,
+        ...options.headers,
+      },
     });
   } catch {
     // fetch โยน error เมื่อต่อเซิร์ฟเวอร์ไม่ได้เลย เช่น API ไม่ได้เปิด
