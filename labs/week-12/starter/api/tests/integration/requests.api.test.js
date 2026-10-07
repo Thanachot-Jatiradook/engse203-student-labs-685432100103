@@ -135,4 +135,14 @@ describe('ข้อมูลผิดรูปแบบและ endpoint ผู
     expect(r.status).toBe(200);
     expect(r.body.map((x) => x.id)).toEqual(['REQ-001', 'REQ-004']);
   });
+  test('GET / คืนข้อความ dev', async () => {
+    const r = await request(app).get('/');
+    expect(r.status).toBe(200);
+    expect(r.body).toHaveProperty('api', '/api');
+  });
+  test('GET /api คืน status และ version', async () => {
+    const r = await request(app).get('/api');
+    expect(r.status).toBe(200);
+    expect(r.body).toHaveProperty('version');
+  });
 });
