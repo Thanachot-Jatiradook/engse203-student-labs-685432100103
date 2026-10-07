@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+    branches: ['**']
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run week-12 tests
+        run: |
+          if [ -d "labs/week-12/starter" ]; then
+            npm install --prefix labs/week-12/starter/api
+            npm install --prefix labs/week-12/starter/frontend
+            npm test --prefix labs/week-12/starter/api
+            npm test --prefix labs/week-12/starter/frontend
+          fi
